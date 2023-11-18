@@ -1,0 +1,33 @@
+﻿<Window x:Class="PhotoStudio.Auth" xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:Interactions="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Width="600" Height="400">
+    <StackPanel>
+        <Image Source="/Resources/PhotoStudio.jpg" />
+        <TextBlock FontFamily="Century Gothic" FontSize="36" Foreground="White" HorizontalAlignment="Center" Margin="0, -320, 0, 0">Ламбада</TextBlock>
+        <TextBlock FontFamily="Century Gothic" FontSize="20" Foreground="White" HorizontalAlignment="Center" Margin="0, -290, 0, 0">фотостудия</TextBlock>
+        <StackPanel Opacity="0.85" Width="250" Height="130" Background="White" Margin="0 -350 0 0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0, 10, 0, 0" >
+                <MaterialDesign:PackIcon Kind="ShieldPerson" Foreground="{Binding ElementName=loginInput, Path=BorderBrush}" VerticalAlignment="Center" Margin="0,16,10,0" />
+                <TextBox x:Name="loginInput" Width="140" FontFamily="Century Gothic" VerticalAlignment="Center" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    <Interactions:Interaction.Triggers>
+                        <Interactions:EventTrigger EventName="TextChanged">
+                            <Interactions:InvokeCommandAction Command="{Binding InputTextChangedCommand}" />
+                        </Interactions:EventTrigger>
+                    </Interactions:Interaction.Triggers>
+                </TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,10,0,0" HorizontalAlignment="Center">
+                <MaterialDesign:PackIcon Kind="Lock" Foreground="{Binding ElementName=passwordInput, Path=BorderBrush}" VerticalAlignment="Center" Margin="0,10,10,0"/>
+                <PasswordBox Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" x:Name="passwordInput" FontFamily="Century Gothic" Width="140">
+                    <Interactions:Interaction.Triggers>
+                        <Interactions:EventTrigger EventName="PasswordChanged">
+                            <Interactions:InvokeCommandAction Command="{Binding InputTextChangedCommand}" />
+                        </Interactions:EventTrigger>
+                    </Interactions:Interaction.Triggers>
+                </PasswordBox>
+            </StackPanel>
+            <TextBlock HorizontalAlignment="Center" Foreground="Chocolate" FontFamily="Century Gothic" FontSize="9" Visibility="{Binding AuthValidationVisibility}" Margin="0,15,0,0">Ошибка входа!</TextBlock>
+        </StackPanel>
+        <Button Style="{StaticResource MaterialDesignRaisedButton}" Height="40" Width="100" Background="DarkGray" Command="{Binding AuthCommand}" FontSize="14" BorderBrush="{x:Null}" Margin="0, -140, 0, 0">
+            <TextBlock Text="Войти" FontFamily="CenturyGothic" FontWeight="Light" />
+        </Button>
+    </StackPanel>
+</Window>
