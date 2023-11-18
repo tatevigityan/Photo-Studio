@@ -1,12 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DAL
+﻿namespace DAL
 {
-    class PhotoStudioModel
+    using DAL.Models;
+    using System.Data.Entity;
+
+    public class PhotoStudioModel : DbContext
     {
+        public PhotoStudioModel()
+            : base("name=PhotoStudioModel")
+        {
+        }
+
+        public virtual DbSet<StudioHall> studioHalls { get; set; }
+        public virtual DbSet<Client> clients { get; set; }
+        public virtual DbSet<User> users { get; set; }
+        public virtual DbSet<Booking> bookings { get; set; }
+        public virtual DbSet<StudioService> studioServices { get; set; }
+        public virtual DbSet<StudioServiceMembership> studioServiceMemberships { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
