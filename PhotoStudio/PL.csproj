@@ -211,21 +211,6 @@
     </ApplicationDefinition>
     <Compile Include="ViewModels\ApplicationViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
-    <Compile Include="Views\Navbar.xaml.cs">
-      <DependentUpon>Navbar.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\IncomeReportTab.xaml.cs">
-      <DependentUpon>IncomeReportTab.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ServicesTab.xaml.cs">
-      <DependentUpon>ServicesTab.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\StatisticsTab.xaml.cs">
-      <DependentUpon>StatisticsTab.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\StudioHallsTab.xaml.cs">
-      <DependentUpon>StudioHallsTab.xaml</DependentUpon>
-    </Compile>
     <Page Include="Views\Auth.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -238,26 +223,6 @@
       <DependentUpon>Auth.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Navbar.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\IncomeReportTab.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ServicesTab.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\StatisticsTab.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\StudioHallsTab.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

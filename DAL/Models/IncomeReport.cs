@@ -4,6 +4,5 @@
     {
         public string studioHall { get; set; }
         public string totalIncome { get; set; }
-        public string date { get; set; }
     }
 }
