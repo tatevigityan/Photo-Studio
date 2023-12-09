@@ -1,0 +1,135 @@
+﻿<UserControl x:Class="PhotoStudio.StudioHallsTab" xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:ToolKit="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:IconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750">
+    <!--<UserControl.Resources>
+        <Style TargetType="MaterialDesign:PackIcon">
+            <Setter Property="Width" Value="30"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+        </Style>
+
+        <Style x:Key="RoomButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+            <Setter Property="Button.Height" Value="150" />
+            <Setter Property="Button.Width" Value="150" />
+            <Setter Property="Button.Foreground" Value="Black" />
+            <Setter Property="Button.BorderBrush" Value="Transparent" />
+            <Setter Property="Button.HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top"></Setter>
+        </Style>
+
+        <DataTemplate x:Key="economyContent">
+            <Grid Width="150" Height="150">
+                <TextBlock Text="{Binding DataContext.Number, RelativeSource={RelativeSource AncestorType=Button}}" FontSize="20" TextAlignment="Center" Margin="0 0 0 0"  HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding DataContext.Cost, RelativeSource={RelativeSource AncestorType=Button}}" FontSize="17" TextAlignment="Center" Margin="18 111 0 0"  HorizontalAlignment="Left"/>
+                <IconPacks:PackIconUnicons Kind="DollarAlt" Margin="-4 110 0 0" Width="25" Height="25"/>
+            </Grid>
+        </DataTemplate>
+
+        <Style x:Key="EconomyRoomStyle" TargetType="Button" BasedOn="{StaticResource RoomButtonStyle}">
+            <Setter Property="Button.Background" Value="GhostWhite" />
+            <Setter Property="ContentTemplate" Value="{StaticResource economyContent}" />
+            <Setter Property="Command" Value="{Binding DataContext.DialogOpenCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+            <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}}" />
+        </Style>
+    </UserControl.Resources>
+
+    <MaterialDesign:DialogHost BorderBrush="{DynamicResource MaterialDesignDivider}" CloseOnClickAway="True" Name="BookingDialog">
+        <MaterialDesign:DialogHost.DialogContent>
+            <Grid>
+                <Grid Name="GuestGrid" Width="500" Height="435" HorizontalAlignment="Center" Background="White">
+                    <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}" HorizontalAlignment="Center"  
+                    FontFamily="Century Gothic" FontWeight="Bold" FontSize="30" 
+                    Text="Room Reservation" Margin="0 12 0 0"/>
+                    <StackPanel Orientation="Vertical" Margin="0 50 0 0" HorizontalAlignment="Center" Width="400">
+                        <Border Visibility="Visible" BorderBrush="#89000000" BorderThickness="1" CornerRadius="15" Margin="0 15 0 15">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Width="220">
+                                <TextBlock Foreground="#89000000" Background="White" Width="70" Height="15"
+                                        HorizontalAlignment="Left" Margin="-50 -16 0 -10" TextAlignment="Center" >Reservator</TextBlock>
+                                <StackPanel Orientation="Horizontal" Height="40" Margin="0 0 0 0">
+                                    <MaterialDesign:PackIcon Kind="Account" VerticalAlignment="Center" Margin="10,24,10,0" Width="18" Height="18" Foreground="#89000000" />
+                                    <TextBox Name="GuestName" Height="44" MaterialDesign:HintAssist.Hint="Name" Width="140"
+                                    VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                    </TextBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Height="40">
+                                    <MaterialDesign:PackIcon Kind="Account"  VerticalAlignment="Center" 
+                                                    Margin="10,24,10,0" Width="18" Height="18" Foreground="#89000000" />
+                                    <TextBox Name="GuestSurname" Height="44" MaterialDesign:HintAssist.Hint="Surname" Width="140"
+                                    VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                                    Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                    </TextBox>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Height="40">
+                                    <IconPacks:PackIconIonicons Kind="CallMD" VerticalAlignment="Center" Foreground="#89000000"
+                                                    Width="15" Height="15" Margin="11 24 13 0"/>
+                                    <TextBox Name="GuestPhone" Height="44" MaterialDesign:HintAssist.Hint="Phone" Width="140" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                    </TextBox>
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 7 0 12">
+                        <Button  Command="{Binding CreateReservationCommand}"  Margin="7 0 0 0" Style="{StaticResource MaterialDesignRaisedButton}" Background="Purple" MaterialDesign:ButtonAssist.CornerRadius="20" Height="40" Width="113" BorderBrush="{x:Null}" Foreground="Purple">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Complete" FontSize="14" Foreground="White" TextAlignment="Center" Margin="0 0 3 0"/>
+                                <IconPacks:PackIconPicolIcons Kind="NotesAccept" VerticalAlignment="Center" Margin="0 2 0 0"
+                                                                Foreground="White" Height="17" Width="17"  />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <Grid Name="SuccessGrid" Visibility="Hidden" Width="500" Height="250" HorizontalAlignment="Center" Background="White">
+
+                    <StackPanel Orientation="Horizontal"  Margin="0 112 0 0" HorizontalAlignment="Center">
+                        <TextBlock Style="{StaticResource MaterialDesignHeadline4TextBlock}"   
+                    FontFamily="Century Gothic" FontWeight="Bold" FontSize="38" Foreground="Black"
+                    Text="Completed successfully"/>
+                        <IconPacks:PackIconFontAwesome Kind="CheckCircleRegular" Foreground="Purple" 
+                                                        Width="60" Height="60" Margin="15 -10 0 0"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0 7 0 12">
+                        <Button  Command="{x:Static MaterialDesign:DialogHost.CloseDialogCommand}"  Margin="7 0 0 0" Style="{StaticResource MaterialDesignRaisedButton}" Background="Purple" MaterialDesign:ButtonAssist.CornerRadius="20" Height="40" Width="113" BorderBrush="{x:Null}" Foreground="Purple">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Finish" FontSize="14" Foreground="White" TextAlignment="Center" Margin="0 0 4 0"/>
+                                <IconPacks:PackIconForkAwesome Kind="CheckSquareOutline" VerticalAlignment="Center"                                                                   Foreground="White" Height="17" Width="17"  />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </MaterialDesign:DialogHost.DialogContent>
+        <StackPanel>
+            <StackPanel Background="White" Orientation="Horizontal" Height="50">
+                <StackPanel Height="30" Orientation="Horizontal" Width="60">
+                    <IconPacks:PackIconBoxIcons Kind="SolidCategory" VerticalAlignment="Center" Foreground="#89000000"/>
+                    <ComboBox Name="roomCategoryComboBox"
+                                SelectedIndex="0">
+                        <ComboBoxItem Name="All" VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Все" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Height="30" Orientation="Horizontal" Width="270">
+                    <ToolKit:DateTimePicker />
+                </StackPanel>
+            </StackPanel>
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" Background="#FFF6F6F8" HorizontalAlignment="Left" Width="727" Height="400">
+                <Grid>
+                    <Grid  Name="bookRoomGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="259*"/>
+                            <ColumnDefinition Width="176*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Style="{StaticResource EconomyRoomStyle}"></Button>
+                        <Button Style="{StaticResource EconomyRoomStyle}" Margin="180 0 0 0"></Button>
+                        <Button Style="{StaticResource EconomyRoomStyle}" Margin="360 0 0 0"></Button>
+                        <Button Style="{StaticResource EconomyRoomStyle}" Margin="540,0,0,0"></Button>
+                    </Grid>
+                </Grid>
+            </ScrollViewer>
+        </StackPanel>
+    </MaterialDesign:DialogHost>-->
+</UserControl>

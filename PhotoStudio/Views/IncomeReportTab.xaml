@@ -1,0 +1,23 @@
+﻿<UserControl x:Class="PhotoStudio.IncomeReportTab" xmlns:Interactions="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" mc:Ignorable="d" d:DesignHeight="536" d:DesignWidth="750">
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Background="White" Width="750">
+            <Label FontFamily="Century Gothic" Content="С" Margin="170, 13, 3, 0"/>
+            <DatePicker FontFamily="Century Gothic" Margin="0 0 0 20" Height="50" Width="150" Name="StartDate">
+                <Interactions:Interaction.Triggers>
+                    <Interactions:EventTrigger EventName="SelectedDateChanged">
+                        <Interactions:InvokeCommandAction Command="{Binding UpdateReportCommand}" />
+                    </Interactions:EventTrigger>
+                </Interactions:Interaction.Triggers>
+            </DatePicker>
+            <Label FontFamily="Century Gothic" Content="По" Margin="32, 13, 3, 0" />
+            <DatePicker FontFamily="Century Gothic" Margin="0 0 0 20" Height="50" Width="150" Name="EndDate">
+                <Interactions:Interaction.Triggers>
+                    <Interactions:EventTrigger EventName="SelectedDateChanged">
+                        <Interactions:InvokeCommandAction Command="{Binding UpdateReportCommand}" />
+                    </Interactions:EventTrigger>
+                </Interactions:Interaction.Triggers>
+            </DatePicker>
+        </StackPanel>
+        <DataGrid ItemsSource="{Binding IncomeReports}" FontFamily="Century Gothic" HorizontalAlignment="Left" Height="453" IsReadOnly="True" HeadersVisibility="None" VerticalAlignment="Top" Width="750" Name="datagrid" BorderBrush="{x:Null}" Foreground="Black" FontSize="15" BorderThickness="0" HorizontalGridLinesBrush="White" GridLinesVisibility="Horizontal" Background="#F6F6F8"/>
+    </StackPanel>
+</UserControl>
