@@ -20,6 +20,16 @@
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Service>()
+                .HasMany(x => x.bookings)
+                .WithMany(x => x.services)
+                .Map(m =>
+                {
+                    m.ToTable("BookingServices");
+                    m.MapLeftKey("serviceId");
+                    m.MapRightKey("bookingId");
+                });
+
             base.OnModelCreating(modelBuilder);
         }
     }
