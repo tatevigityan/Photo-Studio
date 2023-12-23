@@ -2,11 +2,10 @@
 
 namespace DAL.Models
 {
-    [Table("Client")]
-    public class Client
+    [Table("CategoryHall")]
+    public class CategoryHall
     {
         public int id { get; set; }
         public string name { get; set; }
-        public string phone { get; set; }
     }
 }

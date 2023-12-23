@@ -2,8 +2,8 @@
 {
     public class IncomeReport
     {
-        public string studioHall { get; set; }
-        public string totalIncome { get; set; }
-        public string date { get; set; }
+        public string Hall { get; set; }
+        public string Date { get; set; }
+        public string Price { get; set; }
     }
 }

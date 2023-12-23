@@ -10,12 +10,13 @@
         {
         }
 
-        public virtual DbSet<StudioHall> studioHalls { get; set; }
-        public virtual DbSet<Client> clients { get; set; }
+        public virtual DbSet<Role> roles { get; set; }
         public virtual DbSet<User> users { get; set; }
+        public virtual DbSet<Hall> halls { get; set; }
+        public virtual DbSet<Client> clients { get; set; }
+        public virtual DbSet<Service> services { get; set; }
         public virtual DbSet<Booking> bookings { get; set; }
-        public virtual DbSet<StudioService> studioServices { get; set; }
-        public virtual DbSet<StudioServiceMembership> studioServiceMemberships { get; set; }
+        public virtual DbSet<CategoryHall> hallCategories { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

@@ -3,9 +3,9 @@ using PhotoStudio.ViewModels;
 
 namespace PhotoStudio
 {
-    public partial class StudioHallsTab : UserControl
+    public partial class TabStatistics : UserControl
     {
-        public StudioHallsTab(ApplicationViewModel appViewModel)
+        public TabStatistics(ApplicationViewModel appViewModel)
         {
             InitializeComponent();
             DataContext = appViewModel;

@@ -3,9 +3,9 @@ using PhotoStudio.ViewModels;
 
 namespace PhotoStudio
 {
-    public partial class IncomeReportTab : UserControl
+    public partial class TabReport : UserControl
     {
-        public IncomeReportTab(ApplicationViewModel appViewModel)
+        public TabReport(ApplicationViewModel appViewModel)
         {
             InitializeComponent();
             DataContext = appViewModel;

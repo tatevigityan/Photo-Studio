@@ -59,11 +59,12 @@
   <ItemGroup>
     <Compile Include="DataBaseDataOperation.cs" />
     <Compile Include="Models\Booking.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Client.cs" />
     <Compile Include="Models\IncomeReport.cs" />
-    <Compile Include="Models\StudioHall.cs" />
-    <Compile Include="Models\StudioService.cs" />
-    <Compile Include="Models\StudioServiceMembership.cs" />
+    <Compile Include="Models\Hall.cs" />
+    <Compile Include="Models\CategoryHall.cs" />
+    <Compile Include="Models\Service.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="PhotoStudioModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

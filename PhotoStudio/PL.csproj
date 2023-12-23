@@ -214,17 +214,14 @@
     <Compile Include="Views\Navbar.xaml.cs">
       <DependentUpon>Navbar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\IncomeReportTab.xaml.cs">
-      <DependentUpon>IncomeReportTab.xaml</DependentUpon>
+    <Compile Include="Views\Tabs\TabReport.xaml.cs">
+      <DependentUpon>TabReport.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ServicesTab.xaml.cs">
-      <DependentUpon>ServicesTab.xaml</DependentUpon>
+    <Compile Include="Views\Tabs\TabStatistics.xaml.cs">
+      <DependentUpon>TabStatistics.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\StatisticsTab.xaml.cs">
-      <DependentUpon>StatisticsTab.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\StudioHallsTab.xaml.cs">
-      <DependentUpon>StudioHallsTab.xaml</DependentUpon>
+    <Compile Include="Views\Tabs\TabBooking.xaml.cs">
+      <DependentUpon>TabBooking.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Auth.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -242,19 +239,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\IncomeReportTab.xaml">
+    <Page Include="Views\Tabs\TabReport.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ServicesTab.xaml">
+    <Page Include="Views\Tabs\TabStatistics.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\StatisticsTab.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\StudioHallsTab.xaml">
+    <Page Include="Views\Tabs\TabBooking.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -293,9 +286,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\PhotoStudio.jpg" />
+    <Resource Include="Resources\App\PhotoStudio.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\Halls\" />
+    <Folder Include="Resources\Services\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
