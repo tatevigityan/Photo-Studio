@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="PhotoStudio.TabBooking" xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:ToolKit="http://schemas.xceed.com/wpf/xaml/toolkit" xmlns:IconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" d:DesignHeight="450" d:DesignWidth="750">
+    <UserControl.Resources>
+        <Style TargetType="MaterialDesign:PackIcon">
+            <Setter Property="Width" Value="30"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+        </Style>
+
+        <Style x:Key="hallButtonStyle" TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
+            <Setter Property="Button.Height" Value="150" />
+            <Setter Property="Button.Width" Value="150" />
+            <Setter Property="Button.Foreground" Value="Black" />
+            <Setter Property="Button.BorderBrush" Value="Transparent" />
+            <Setter Property="Button.HorizontalAlignment" Value="Left" />
+            <Setter Property="VerticalAlignment" Value="Top"></Setter>
+        </Style>
+
+        <DataTemplate x:Key="hallContent">
+            <Grid Width="150" Height="150">
+                <TextBlock Text="{Binding DataContext.Number, RelativeSource={RelativeSource AncestorType=Button}}" FontSize="20" TextAlignment="Center" Margin="0 0 0 0"  HorizontalAlignment="Left"/>
+                <TextBlock Text="{Binding DataContext.Cost, RelativeSource={RelativeSource AncestorType=Button}}" FontSize="17" TextAlignment="Center" Margin="18 111 0 0"  HorizontalAlignment="Left"/>
+                <MaterialDesign:PackIcon Kind="CurrencyRub" Margin="-4 110 0 0" Width="25" Height="25"/>
+            </Grid>
+        </DataTemplate>
+
+        <Style x:Key="HallStyle" TargetType="Button" BasedOn="{StaticResource hallButtonStyle}">
+            <Setter Property="Button.Background" Value="GhostWhite" />
+            <Setter Property="ContentTemplate" Value="{StaticResource hallContent}" />
+            <Setter Property="Command" Value="{Binding DataContext.DialogOpenCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}" />
+            <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource Self}}" />
+        </Style>
+    </UserControl.Resources>
+
+    <StackPanel>
+            <StackPanel Background="White" Orientation="Horizontal" Height="50">
+                <StackPanel Height="30" Orientation="Horizontal" Width="60">
+                    <IconPacks:PackIconBoxIcons Kind="SolidCategory" VerticalAlignment="Center" Foreground="#89000000"/>
+                    <ComboBox Name="hallCategoryComboBox"
+                                SelectedIndex="0">
+                        <ComboBoxItem Name="All" VerticalAlignment="Center">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Все" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Height="30" Orientation="Horizontal" Width="270">
+                    <ToolKit:DateTimePicker />
+                </StackPanel>
+            </StackPanel>
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" Background="#FFF6F6F8" HorizontalAlignment="Left" Width="727" Height="400">
+                <Grid  Name="bookingGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="259*"/>
+                        <ColumnDefinition Width="176*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{StaticResource HallStyle}"></Button>
+                    <Button Style="{StaticResource HallStyle}" Margin="180 0 0 0"></Button>
+                    <Button Style="{StaticResource HallStyle}" Margin="360 0 0 0"></Button>
+                </Grid>
+            </ScrollViewer> 
+        </StackPanel>
+</UserControl>
