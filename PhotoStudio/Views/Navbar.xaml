@@ -2,24 +2,19 @@
     <StackPanel Background="#F6F5F8">
         <StackPanel Name="MainContent" Height="458" />
         <StackPanel Orientation="Horizontal" Background="Transparent" Height="65">
-            <Button Name="charts" Visibility="{Binding !TabsVisibility}" Style="{StaticResource MaterialDesignFloatingActionButton}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="Black" Command="{Binding OpenChartsTabCommand}" Margin="305 0 0 0">
+            <Button Name="charts" Visibility="Hidden" Style="{StaticResource MaterialDesignFloatingActionButton}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="Black" Command="{Binding OpenChartsTabCommand}" Margin="305 0 0 0">
                 <StackPanel Margin="-5">
                     <MaterialDesign:PackIcon Kind="ChartArc" Width="35" Height="35"/>
                 </StackPanel>
             </Button>
-            <Button Name="report" Visibility="{Binding !TabsVisibility}" Style="{StaticResource MaterialDesignFloatingActionButton}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="Black" Command="{Binding OpenReportTabCommand}" Margin="15 0 15 0">
+            <Button Name="report" Visibility="Hidden" Style="{StaticResource MaterialDesignFloatingActionButton}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="Black" Command="{Binding OpenReportTabCommand}" Margin="15 0 15 0">
                 <StackPanel Margin="-5">
                     <MaterialDesign:PackIcon Kind="ChartTimelineVariantShimmer" Width="35" Height="35"/>
                 </StackPanel>
             </Button>
-            <Button Name="booking" Visibility="{Binding TabsVisibility}" Style="{StaticResource MaterialDesignFloatingActionButton}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="Black" Command="{Binding OpenBookingsTabCommand}" Margin="-172 0 55 0">
+            <Button Name="booking" Visibility="Hidden" Style="{StaticResource MaterialDesignFloatingActionButton}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="Black" Command="{Binding OpenBookingsTabCommand}" Margin="-107 0 55 0">
                 <StackPanel Margin="-5">
                     <MaterialDesign:PackIcon Kind="Style" Width="35" Height="35"/>
-                </StackPanel>
-            </Button>
-            <Button Name="services" Visibility="{Binding TabsVisibility}" Style="{StaticResource MaterialDesignFloatingActionButton}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="Black" Command="{Binding OpenServicesTabCommand}" Margin="-84 0 0 0">
-                <StackPanel Margin="-5">
-                    <MaterialDesign:PackIcon Kind="CameraAccount" Width="35" Height="35" />
                 </StackPanel>
             </Button>
             <Button Style="{StaticResource MaterialDesignFloatingActionButton}" BorderBrush="{x:Null}" Background="{x:Null}" Foreground="Black" Command="{Binding SwitchProfileCommand}" Margin="240 0 0 0">
