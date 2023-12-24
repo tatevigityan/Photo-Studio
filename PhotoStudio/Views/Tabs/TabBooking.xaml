@@ -10,11 +10,11 @@
         </Style>
     </UserControl.Resources>
 
-    <StackPanel>
+    <StackPanel Orientation="Vertical">
         <StackPanel Background="White" Orientation="Horizontal" Height="50">
             <StackPanel Height="30" Orientation="Horizontal" Width="150" Margin="20 0 0 0">
                 <IconPacks:PackIconBoxIcons Kind="SolidCategoryAlt" VerticalAlignment="Center" Foreground="#89000000" />
-                <ComboBox Name="hallCategoryComboBox" ItemsSource="{Binding hallCategories}" SelectedIndex="2" DisplayMemberPath="name" Margin="10 0 0 0">
+                <ComboBox Name="hallCategoryComboBox" FontFamily="Century Gothic" ItemsSource="{Binding hallCategories}" SelectedIndex="2" DisplayMemberPath="name" Margin="10 0 0 0">
                     <Interactions:Interaction.Triggers>
                         <Interactions:EventTrigger EventName="SelectionChanged">
                             <Interactions:InvokeCommandAction Command="{Binding changeHallCategoryCommand}" />
@@ -23,11 +23,18 @@
                 </ComboBox>
             </StackPanel>
             <StackPanel Height="30" Orientation="Horizontal" Width="270">
-                <ToolKit:DateTimePicker />
+                <ToolKit:DateTimePicker FontFamily="Century Gothic" />
             </StackPanel>
         </StackPanel>
-        <ScrollViewer HorizontalScrollBarVisibility="Visible" Background="#FFF6F6F8" HorizontalAlignment="Left" Width="455" Height="400">
-            <Grid  Name="bookingGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,10" />
-        </ScrollViewer>
+        <StackPanel Orientation="Horizontal">
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" Background="#FFF6F6F8" HorizontalAlignment="Left" Width="455" Height="400">
+                <Grid  Name="bookingGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,10" />
+            </ScrollViewer>
+            <StackPanel Width="280" Background="#FFF6F6F8">
+                <Border BorderThickness="1" BorderBrush="LightGray" CornerRadius="7" Margin="10 10 10 10" Height="380">
+                    <TextBlock Text="Бронирование зала" Margin="0 15 0 0" FontFamily="Century Gothic"  HorizontalAlignment="Center" FontSize="20" Height="25" VerticalAlignment="Top" />
+                </Border>
+            </StackPanel>
+        </StackPanel>
     </StackPanel>
 </UserControl>

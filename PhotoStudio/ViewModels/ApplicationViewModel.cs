@@ -119,21 +119,15 @@ namespace PhotoStudio.ViewModels
             }
         }
 
-        public RelayCommand createBookingCommand
+        public void createBooking(object sender, EventArgs e)
         {
-            get
+            try
             {
-                return new RelayCommand(obj =>
-                  {
-                      try
-                      {
-                          MessageBox.Show("Booking created!");
-                      }
-                      catch (Exception ex)
-                      {
-                          MessageBox.Show(ex.Message);
-                      }
-                  });
+                MessageBox.Show("Booking created!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -310,6 +304,7 @@ namespace PhotoStudio.ViewModels
                 contentPanel.Children.Add(hallImage);
 
                 hallButton.Content = contentPanel;
+                hallButton.Click += createBooking;
 
                 tabBooking.bookingGrid.Children.Add(hallButton);
                 index++;
