@@ -289,7 +289,11 @@
     <Resource Include="Resources\App\PhotoStudio.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\Halls\" />
+    <Resource Include="Resources\Halls\love.jpg" />
+    <Resource Include="Resources\Halls\nature.jpg" />
+    <Resource Include="Resources\Halls\newyear.jpg" />
+    <Resource Include="Resources\Halls\professional.jpg" />
+    <Resource Include="Resources\Halls\wedding.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

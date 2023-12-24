@@ -9,6 +9,7 @@ using System.Linq;
 using LiveCharts;
 using DAL.Models;
 using DAL;
+using System.Windows.Media.Imaging;
 
 namespace PhotoStudio.ViewModels
 {
@@ -18,7 +19,7 @@ namespace PhotoStudio.ViewModels
         private int quarterIncome;
         private int yearIncome;
         private int membershipPrice;
-        private string[] tabs = { "booking", "report", "charts" };
+        private string[] tabs = { "booking", "statistics", "report" };
 
         private Visibility validationVisibility;
 
@@ -164,7 +165,7 @@ namespace PhotoStudio.ViewModels
                     {
                         tabStatistics = new TabStatistics(this);
                         navbar.MainContent.Children.Clear();
-                        navbarTabSelection("charts");
+                        navbarTabSelection("statistics");
                         loadTabStatistics();
                         navbar.MainContent.Children.Add(tabStatistics);
                     }
@@ -260,23 +261,36 @@ namespace PhotoStudio.ViewModels
             halls = databaseContext.getHalls();
             tabBooking.bookingGrid.Children.Clear();
 
-            int i = 0, j = 0;
+            int index = 0;
 
             foreach (Hall hall in halls)
             {
                 Button hallButton = new Button();
-                hallButton.Style = tabBooking.TryFindResource("HallStyle") as Style;
-                hallButton.Margin = new Thickness(180 * i, j * 180, 0, 0);
+                hallButton.Style = tabBooking.TryFindResource("hallButtonStyle") as Style;
+                hallButton.Margin = new Thickness(0, index * 320, 0, 0);
                 hallButton.DataContext = hall;
 
-                tabBooking.bookingGrid.Children.Add(hallButton);
+                StackPanel contentPanel = new StackPanel();
 
-                i++;
-                if (i > 1)
-                {
-                    i = 0;
-                    j++;
-                }
+                TextBlock titleTextBlock = new TextBlock();
+                titleTextBlock.Text = hall.name;
+                titleTextBlock.Foreground = Brushes.White;
+                titleTextBlock.FontFamily = new FontFamily("Century Gothic");
+                titleTextBlock.FontSize = 20;
+                titleTextBlock.TextAlignment = TextAlignment.Center;
+                titleTextBlock.HorizontalAlignment = HorizontalAlignment.Left;
+
+                Image hallImage = new Image();
+                hallImage.Height = 270;
+                hallImage.Source = new BitmapImage(new Uri($"pack://application:,,,/PhotoStudio;component/Resources/Halls/{hall.imageTitle}", UriKind.Absolute));
+
+                contentPanel.Children.Add(titleTextBlock);
+                contentPanel.Children.Add(hallImage);
+
+                hallButton.Content = contentPanel;
+
+                tabBooking.bookingGrid.Children.Add(hallButton);
+                index++;
             }
         }
 
