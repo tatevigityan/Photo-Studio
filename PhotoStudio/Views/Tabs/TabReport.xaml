@@ -5,7 +5,7 @@
             <DatePicker FontFamily="Century Gothic" Margin="0 0 0 20" Height="50" Width="150" Name="StartDate">
                 <Interactions:Interaction.Triggers>
                     <Interactions:EventTrigger EventName="SelectedDateChanged">
-                        <Interactions:InvokeCommandAction Command="{Binding UpdateReportCommand}" />
+                        <Interactions:InvokeCommandAction Command="{Binding updateReportCommand}" />
                     </Interactions:EventTrigger>
                 </Interactions:Interaction.Triggers>
             </DatePicker>
@@ -13,11 +13,11 @@
             <DatePicker FontFamily="Century Gothic" Margin="0 0 0 20" Height="50" Width="150" Name="EndDate">
                 <Interactions:Interaction.Triggers>
                     <Interactions:EventTrigger EventName="SelectedDateChanged">
-                        <Interactions:InvokeCommandAction Command="{Binding UpdateReportCommand}" />
+                        <Interactions:InvokeCommandAction Command="{Binding updateReportCommand}" />
                     </Interactions:EventTrigger>
                 </Interactions:Interaction.Triggers>
             </DatePicker>
         </StackPanel>
-        <DataGrid ItemsSource="{Binding IncomeReports}" FontFamily="Century Gothic" HorizontalAlignment="Left" Height="453" IsReadOnly="True" HeadersVisibility="Column" VerticalAlignment="Top" Width="750" Name="datagrid" BorderBrush="{x:Null}" Foreground="Black" FontSize="15" BorderThickness="0" HorizontalGridLinesBrush="White" GridLinesVisibility="Horizontal" Background="#F6F6F8"/>
+        <DataGrid ItemsSource="{Binding incomeList}" FontFamily="Century Gothic" HorizontalAlignment="Left" Height="453" IsReadOnly="True" HeadersVisibility="Column" VerticalAlignment="Top" Width="750" Name="datagrid" BorderBrush="{x:Null}" Foreground="Black" FontSize="15" BorderThickness="0" HorizontalGridLinesBrush="White" GridLinesVisibility="Horizontal" Background="#F6F6F8"/>
     </StackPanel>
 </UserControl>

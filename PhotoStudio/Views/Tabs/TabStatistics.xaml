@@ -15,17 +15,17 @@
             <StackPanel Orientation="Horizontal" Margin="20 30 0 0" Height="100" Width="210" Background="DarkGray">
                 <MaterialDesign:PackIcon Kind="Money" Width="25" Height="25" Foreground="White" Margin="3 5 3 0" />
                 <TextBlock FontFamily="Century Gothic" Text="Доход за текущий месяц" Margin="0 10 0 0" Foreground="White" FontSize="13"/>
-                <TextBlock FontFamily="Century Gothic" Text="{Binding CurrentMonthIncome}" FontSize="25"  Foreground="White" VerticalAlignment="Center" Margin="-135 10 0 0"/>
+                <TextBlock FontFamily="Century Gothic" Text="{Binding currentMonthIncome}" FontSize="25"  Foreground="White" VerticalAlignment="Center" Margin="-135 10 0 0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="30 30 0 0" Height="100" Width="210" Background="DarkGray">
                 <MaterialDesign:PackIcon Kind="Money" Width="25" Height="25" Foreground="White" Margin="3 5 3 0" />
                 <TextBlock FontFamily="Century Gothic" Text="Доход за текущий квартал" Margin="0 10 0 0" Foreground="White" FontSize="13"/>
-                <TextBlock FontFamily="Century Gothic" Text="{Binding CurrentQuarterIncome}" FontSize="25"  Foreground="White" VerticalAlignment="Center" Margin="-135 10 0 0"/>
+                <TextBlock FontFamily="Century Gothic" Text="{Binding currentQuarterIncome}" FontSize="25"  Foreground="White" VerticalAlignment="Center" Margin="-135 10 0 0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="30 30 0 0" Height="100" Width="215" Background="DarkGray">
                 <MaterialDesign:PackIcon Kind="Money" Width="25" Height="25" Foreground="White" Margin="3 5 3 0" />
                 <TextBlock FontFamily="Century Gothic" Text="Доход за текущий год" Margin="0 10 0 0" Foreground="White" FontSize="13"/>
-                <TextBlock FontFamily="Century Gothic" Text="{Binding CurrentYearIncome}" FontSize="25"  Foreground="White" VerticalAlignment="Center" Margin="-105 10 0 0"/>
+                <TextBlock FontFamily="Century Gothic" Text="{Binding currentYearIncome}" FontSize="25"  Foreground="White" VerticalAlignment="Center" Margin="-105 10 0 0"/>
             </StackPanel>
         </StackPanel>
     </StackPanel>

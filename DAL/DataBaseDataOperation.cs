@@ -18,104 +18,34 @@ namespace DAL
             dataBase = new PhotoStudioModel();
         }
 
-        //public Guest FindGuest(Guest guest)
-        //{
-        //    if (dataBase.Guests != null)
-        //    {
-        //        var foundGuest = dataBase.Guests.FirstOrDefault(g => g.Name == guest.Name && g.Surname == guest.Surname &&
-        //        g.Passport == guest.Passport && g.BirthDate == guest.BirthDate);
-
-        //        return foundGuest != null ? foundGuest : null;
-        //    }
-
-        //    return null;
-        //}
-
-        //public void ReservateRoom(int id)
-        //{
-        //    dataBase.Rooms.Find(id).Status = "Occupied";
-        //    dataBase.SaveChanges();
-        //}
-
-        //public void RoomAvailable(int Id)
-        //{
-        //    dataBase.Rooms.Find(Id).Status = "Available";
-        //    dataBase.SaveChanges();
-        //}
-
         public List<IncomeReport> getBookings(DateTime? startDate, DateTime? endDate)
         {
             return dataBase.bookings
-                .Join(dataBase.studioHalls,
-                booking => booking.studioHallId,
+                .Join(dataBase.halls,
+                booking => booking.hallId,
                 hall => hall.id,
                 (booking, hall) => new
                 {
                     studioHall = hall.name,
                     totalPrice = booking.totalPrice,
-                    date = booking.date
+                    date = booking.dateTime
                 })
                 .Where(booking => booking.date >= startDate && booking.date <= endDate)
                 .OrderBy(booking => booking.date)
                 .Select(booking => new IncomeReport
                 {
-                    studioHall = booking.studioHall,
-                    totalIncome = booking.totalPrice.ToString(),
-                    date = booking.date.Day + "." + booking.date.Month + "." + booking.date.Year + " " + booking.date.Hour + ":" + booking.date.Minute
+                    Hall = booking.studioHall,
+                    Price = booking.totalPrice.ToString(),
+                    Date = booking.date.Day + "." + booking.date.Month + "." + booking.date.Year + " " + booking.date.Hour + ":" + booking.date.Minute
                 })
                 .ToList();
         }
 
-        public void RoomControl()
+        public List<Hall> getHalls()
         {
-            //foreach (Booking reservation in dataBase.Reservations.Where(r => r.DepartureDate < DateTime.Now && r.isActive == true).ToList())
-            //    foreach (StudioHall room in dataBase.Rooms.Where(r => r.Status == "Occupied" && r.Id == reservation.RoomId).ToList())
-            //    {
-            //        room.Status = "Cleaning";
-            //        reservation.isActive = false;
-            //        dataBase.SaveChanges();
-            //    }
-        }
-
-
-
-        // Ready
-
-        public List<StudioHall> getAvailableStudioHalls()
-        {
-            // todo свободно ли
-            return dataBase.studioHalls
-                .Where(studioHall => studioHall.id > 0)
+            return dataBase.halls
                 .OrderBy(studioHall => studioHall.hourlyPrice)
                 .ToList();
-        }
-
-        public void updateBooking(Booking selectedBooking)
-        {
-            dataBase.bookings.FirstOrDefault(booking => booking.id == selectedBooking.id).totalPrice = selectedBooking.totalPrice;
-        }
-
-        public List<StudioServiceMembership> getStudioServiceMemberships(int bookingId, int clientId)
-        {
-            return dataBase.studioServiceMemberships
-                .Where(membership => membership.bookingId == bookingId && membership.clientId == clientId).ToList();
-        }
-
-        public void removeStudioServiceMemberships(int bookingId, int clientId)
-        {
-            var memberships = dataBase.studioServiceMemberships
-                .Where(membership => membership.bookingId == bookingId && membership.clientId == clientId).ToList();
-
-            foreach (StudioServiceMembership membership in memberships)
-                dataBase.studioServiceMemberships.Remove(membership);
-
-            dataBase.SaveChanges();
-        }
-
-        public void createStudioServiceMembership(StudioServiceMembership membership)
-        {
-            dataBase.studioServiceMemberships.Add(membership);
-            dataBase.SaveChanges();
         }
 
         public void createNewBooking(Booking booking)
@@ -130,9 +60,9 @@ namespace DAL
             dataBase.SaveChanges();
         }
 
-        public List<StudioService> getStudioServices()
+        public List<Service> getServices()
         {
-            return dataBase.studioServices
+            return dataBase.services
                 .OrderBy(service => service.hourlyPrice)
                 .ToList();
         }
@@ -153,11 +83,18 @@ namespace DAL
         {
             List<UserData> users;
 
-            users = dataBase.users.ToList().Where(user => user.login == login && user.password == password).Select(user => new UserData
-            {
-                id = user.id,
-                role = user.role
-            }).ToList();
+            users = dataBase.users
+                .ToList()
+                .Where(user => user.username == login && user.password == password)
+                .Join(dataBase.roles,
+                    user => user.roleId,
+                    role => role.id,
+                    (user, role) => new UserData
+                    {
+                        username = user.username,
+                        role = role.name
+                    })
+                .ToList();
 
             return (users.Count > 0) ? users[0] : null;
         }
@@ -167,17 +104,22 @@ namespace DAL
             return dataBase.users.ToList();
         }
 
-        public int getStudioHallsCount(string selectedCategory)
+        public List<CategoryHall> getHallCategories()
+        {
+            return dataBase.hallCategories.ToList();
+        }
+
+        public int getHallsCount(int selectedCategory)
         {
             return dataBase.bookings
-                .Where(booking => booking.bookingDate.Year == DateTime.Now.Year
-                    && booking.bookingDate.Month == DateTime.Now.Month)
-                .Join(dataBase.studioHalls,
-                    booking => booking.studioHallId,
+                .Where(booking => booking.dateTime.Year == DateTime.Now.Year
+                    && booking.dateTime.Month == DateTime.Now.Month)
+                .Join(dataBase.halls,
+                    booking => booking.hallId,
                     hall => hall.id,
                 (booking, hall) => new
                 {
-                    category = hall.category
+                    category = hall.categoryId
                 })
                 .Where(hall => hall.category == selectedCategory)
                 .ToList().Count;
@@ -186,22 +128,22 @@ namespace DAL
         public int getCurrentMonthIncome()
         {
             return dataBase.bookings
-                .Where(booking => booking.bookingDate.Year == DateTime.Now.Year
-                    && booking.bookingDate.Month == DateTime.Now.Month)
+                .Where(booking => booking.dateTime.Year == DateTime.Now.Year
+                    && booking.dateTime.Month == DateTime.Now.Month)
                 .Sum(booking => booking.totalPrice);
         }
 
         public int getCurrentQuarterIncome()
         {
             return dataBase.bookings
-                .Where(booking => booking.bookingDate.Year == DateTime.Now.Year)
+                .Where(booking => booking.dateTime.Year == DateTime.Now.Year)
                 .Sum(booking => booking.totalPrice);
         }
 
         public int getCurrentYearIncome()
         {
             return dataBase.bookings
-                .Where(booking => booking.bookingDate.Year == DateTime.Now.Year)
+                .Where(booking => booking.dateTime.Year == DateTime.Now.Year)
                 .Sum(booking => booking.totalPrice);
         }
     }

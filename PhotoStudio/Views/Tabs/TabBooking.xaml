@@ -31,32 +31,29 @@
     </UserControl.Resources>
 
     <StackPanel>
-            <StackPanel Background="White" Orientation="Horizontal" Height="50">
-                <StackPanel Height="30" Orientation="Horizontal" Width="60">
-                    <IconPacks:PackIconBoxIcons Kind="SolidCategory" VerticalAlignment="Center" Foreground="#89000000"/>
-                    <ComboBox Name="hallCategoryComboBox"
-                                SelectedIndex="0">
-                        <ComboBoxItem Name="All" VerticalAlignment="Center">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="Все" VerticalAlignment="Center"/>
-                            </StackPanel>
-                        </ComboBoxItem>
-                    </ComboBox>
-                </StackPanel>
-                <StackPanel Height="30" Orientation="Horizontal" Width="270">
-                    <ToolKit:DateTimePicker />
-                </StackPanel>
+        <StackPanel Background="White" Orientation="Horizontal" Height="50">
+            <StackPanel Height="30" Orientation="Horizontal" Width="60">
+                <IconPacks:PackIconBoxIcons Kind="SolidCategory" VerticalAlignment="Center" Foreground="#89000000"/>
+                <ComboBox Name="hallCategoryComboBox"
+                            SelectedIndex="0">
+                    <ComboBoxItem Name="All" VerticalAlignment="Center">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Все" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </ComboBoxItem>
+                </ComboBox>
             </StackPanel>
-            <ScrollViewer HorizontalScrollBarVisibility="Visible" Background="#FFF6F6F8" HorizontalAlignment="Left" Width="727" Height="400">
-                <Grid  Name="bookingGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,10">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="259*"/>
-                        <ColumnDefinition Width="176*"/>
-                    </Grid.ColumnDefinitions>
-                    <Button Style="{StaticResource HallStyle}"></Button>
-                    <Button Style="{StaticResource HallStyle}" Margin="180 0 0 0"></Button>
-                    <Button Style="{StaticResource HallStyle}" Margin="360 0 0 0"></Button>
-                </Grid>
-            </ScrollViewer> 
+            <StackPanel Height="30" Orientation="Horizontal" Width="270">
+                <ToolKit:DateTimePicker />
+            </StackPanel>
         </StackPanel>
+        <ScrollViewer HorizontalScrollBarVisibility="Visible" Background="#FFF6F6F8" HorizontalAlignment="Left" Width="750" Height="400">
+            <Grid  Name="bookingGrid" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="20,20,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="259*"/>
+                <ColumnDefinition Width="176*"/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        </ScrollViewer> 
+    </StackPanel>
 </UserControl>
