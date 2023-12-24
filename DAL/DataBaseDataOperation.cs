@@ -41,9 +41,10 @@ namespace DAL
                 .ToList();
         }
 
-        public List<Hall> getHalls()
+        public List<Hall> getHalls(int categoryId)
         {
             return dataBase.halls
+                .Where(hall => hall.categoryId == categoryId)
                 .OrderBy(studioHall => studioHall.hourlyPrice)
                 .ToList();
         }

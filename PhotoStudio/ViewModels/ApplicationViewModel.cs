@@ -26,6 +26,7 @@ namespace PhotoStudio.ViewModels
         private List<Hall> halls;
         private List<Service> services;
         private List<IncomeReport> incomeReports;
+        private List<CategoryHall> categories;
 
         private UserData currentUser;
         private Auth auth;
@@ -44,6 +45,7 @@ namespace PhotoStudio.ViewModels
         public List<Hall> hallList { get => halls; set { halls = value; notifyPropertyChanged(); } }
         public List<Service> serviceList { get => services; set { services = value; notifyPropertyChanged(); } }
         public List<IncomeReport> incomeList { get => incomeReports; set { incomeReports = value; notifyPropertyChanged(); } }
+        public List<CategoryHall> hallCategories { get => categories; set { categories = value; notifyPropertyChanged(); } }
         public Visibility authValidationVisibility { get => validationVisibility; set { validationVisibility = value; notifyPropertyChanged(); } }
 
         public ApplicationViewModel(Auth window)
@@ -145,6 +147,8 @@ namespace PhotoStudio.ViewModels
                         tabBooking = new TabBooking(this);
                         navbar.MainContent.Children.Clear();
                         navbarTabSelection("booking");
+                        hallCategories = databaseContext.getHallCategories();
+                        halls = databaseContext.getHalls(3);
                         loadTabBookings();
                         navbar.MainContent.Children.Add(tabBooking);
                     }
@@ -205,16 +209,36 @@ namespace PhotoStudio.ViewModels
             get
             {
                 return new RelayCommand(obj =>
-                  {
-                      try
-                      {
-                          incomeList = databaseContext.getBookings(tabReport.StartDate.SelectedDate, tabReport.EndDate.SelectedDate);
-                      }
-                      catch (Exception ex)
-                      {
-                          MessageBox.Show(ex.Message);
-                      }
-                  });
+                {
+                    try
+                    {
+                        incomeList = databaseContext.getBookings(tabReport.StartDate.SelectedDate, tabReport.EndDate.SelectedDate);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                });
+            }
+        }
+
+        public RelayCommand changeHallCategoryCommand
+        {
+            get
+            {
+                return new RelayCommand(obj =>
+                {
+                    try
+                    {
+                        CategoryHall category = (CategoryHall)tabBooking.hallCategoryComboBox.SelectedItem;
+                        halls = databaseContext.getHalls(category.id);
+                        loadTabBookings();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                });
             }
         }
 
@@ -257,8 +281,6 @@ namespace PhotoStudio.ViewModels
 
         private void loadTabBookings()
         {
-            var selectedItem = (ComboBoxItem)tabBooking.hallCategoryComboBox.SelectedItem;
-            halls = databaseContext.getHalls();
             tabBooking.bookingGrid.Children.Clear();
 
             int index = 0;
