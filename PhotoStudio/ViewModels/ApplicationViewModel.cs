@@ -240,14 +240,14 @@ namespace PhotoStudio.ViewModels
         {
             if (currentUser.role == "director")
             {
-                navbar.charts.Visibility = Visibility.Visible;
+                navbar.statistics.Visibility = Visibility.Visible;
                 navbar.report.Visibility = Visibility.Visible;
                 navbar.booking.Visibility = Visibility.Hidden;
                 openChartsTabCommand.Execute(null);
             }
             else
             {
-                navbar.charts.Visibility = Visibility.Hidden;
+                navbar.statistics.Visibility = Visibility.Hidden;
                 navbar.report.Visibility = Visibility.Hidden;
                 navbar.booking.Visibility = Visibility.Visible;
                 openBookingsTabCommand.Execute(null);
