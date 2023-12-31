@@ -18,6 +18,65 @@ namespace DAL
             dataBase = new PhotoStudioModel();
         }
 
+        public List<TimeSlot> getAvailableTimeSlots(DateTime date, int hallId)
+        {
+            var bookingsOnDate = dataBase.bookings
+                .Where(b => DbFunctions.TruncateTime(b.dateTime) == date.Date && b.hallId == hallId)
+                .ToList();
+
+            var allTimeSlots = generateAllTimeSlots();
+
+            foreach (var booking in bookingsOnDate)
+            {
+                var bookedTimeSlots = generateBookedTimeSlots(booking.dateTime, booking.durationHours);
+                allTimeSlots.RemoveAll(bookedTimeSlots.Contains);
+            }
+
+            List<TimeSlot> result = allTimeSlots
+                   .Select(slot =>
+                   {
+                       var parts = slot.Split('-');
+                       if (parts.Length == 2)
+                       {
+                           string startTimeString = parts[0].Trim();
+                           if (TimeSpan.TryParse(startTimeString, out TimeSpan startTime))
+                           {
+                               return new TimeSlot
+                               {
+                                   text = slot,
+                                   startTime = startTime.Hours,
+                                   isSelected = false
+                               };
+                           }
+                       }
+                       return null;
+                   })
+                   .Where(slotViewModel => slotViewModel != null)
+                   .ToList();
+
+            return result ?? new List<TimeSlot>();
+        }
+
+        private List<string> generateAllTimeSlots()
+        {
+            var allTimeSlots = new List<string>();
+            for (int hour = 9; hour < 17; hour++)
+            {
+                allTimeSlots.Add($"{hour}:00-{hour + 1}:00");
+            }
+            return allTimeSlots;
+        }
+
+        private List<string> generateBookedTimeSlots(DateTime startTime, int durationHours)
+        {
+            var bookedTimeSlots = new List<string>();
+            for (int hour = startTime.Hour; hour < startTime.Hour + durationHours; hour++)
+            {
+                bookedTimeSlots.Add($"{hour}:00-{hour + 1}:00");
+            }
+            return bookedTimeSlots;
+        }
+
         public List<IncomeReport> getBookings(DateTime? startDate, DateTime? endDate)
         {
             return dataBase.bookings
@@ -55,16 +114,25 @@ namespace DAL
             dataBase.SaveChanges();
         }
 
-        public void addNewClient(Client client)
+        public int getOrCreateClient(Client client)
         {
-            dataBase.clients.Add(client);
-            dataBase.SaveChanges();
+            var existingClient = dataBase.clients.FirstOrDefault(c => c.name == client.name || c.phone == client.phone);
+
+            if (existingClient != null)
+            {
+                return existingClient.id;
+            }
+            else
+            {
+                dataBase.clients.Add(client);
+                dataBase.SaveChanges();
+                return client.id;
+            }
         }
 
         public List<Service> getServices()
         {
             return dataBase.services
-                .OrderBy(service => service.hourlyPrice)
                 .ToList();
         }
 
@@ -108,6 +176,11 @@ namespace DAL
         public List<CategoryHall> getHallCategories()
         {
             return dataBase.hallCategories.ToList();
+        }
+        
+        public int getCurrentUserId(string username)
+        {
+            return dataBase.users.First(u => u.username == username).id;
         }
 
         public int getHallsCount(int selectedCategory)

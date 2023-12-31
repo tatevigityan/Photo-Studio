@@ -12,6 +12,9 @@ namespace DAL.Models
         public int hourlyPrice { get; set; }
         public List<Booking> bookings { get; set; }
 
+        [NotMapped]
+        public bool isSelected { get; set; }
+
         protected void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Service>().HasOptional(s => s.bookings);
